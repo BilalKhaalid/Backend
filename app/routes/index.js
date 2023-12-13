@@ -3,9 +3,9 @@ var router = express.Router();
 const usersModel = require("./users");
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
-});
+// router.get("/", function (req, res, next) {
+//   res.render("index", { title: "Express" });
+// });
 
 // ! Create
 
@@ -32,4 +32,28 @@ router.get("/delete", async (req, res) => {
   res.send(deletedUser);
 });
 
+// ! Creating Session
+router.get("/", (req, res) => {
+  req.session.ban = true;
+  res.send("<h1>Home Page</h1>");
+});
+
+// ! Reading session data
+router.get("/read", (req, res) => {
+  if (req.session.ban === true) {
+    res.send("banned");
+  } else {
+    res.send("not banned");
+  }
+});
+
+// ! Deleting Session data
+router.get("/removeban", (req, res) => {
+  if (req.session.ban) {
+    req.session.destroy();
+    res.send("Your ban removed");
+  } else {
+    res.send("you are not banned");
+  }
+});
 module.exports = router;
