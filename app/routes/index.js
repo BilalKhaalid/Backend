@@ -56,4 +56,26 @@ router.get("/removeban", (req, res) => {
     res.send("you are not banned");
   }
 });
+
+// ! Creating cookie data
+router.get("/cookie", (req, res) => {
+  res.cookie("users_Cookie", "Bilal");
+  res.send("cookie created");
+});
+
+// ! Reading all cookies data
+router.get("/cookies", (req, res) => {
+  if (req.cookies) {
+    res.send(`All cookies ${req.cookies.users_Cookie}`);
+  } else {
+    res.send(`No Cookies found`);
+  }
+});
+
+// ! Deleting  cookie data
+router.get("/delete-cookies", (req, res) => {
+  res.clearCookie("users cookie");
+  res.send(`deleted cookie: ${req.cookies}`);
+});
+
 module.exports = router;
