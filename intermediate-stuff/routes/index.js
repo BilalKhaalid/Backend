@@ -20,7 +20,7 @@ router.get("/", function (req, res, next) {
 
 router.get("/create", async (req, res) => {
   let userData = await userModel.create({
-    username: "Bilal",
+    username: "Bilal Khalid",
     nickname: "Khalid",
     description: "i am bilal khalid ",
     categories: ["js", "node", "react"],
@@ -30,8 +30,32 @@ router.get("/create", async (req, res) => {
 });
 
 router.get("/read", async (req, res) => {
+  // ! Find All Documents
   const allDocs = await userModel.find();
   res.send(allDocs);
+});
+
+router.get("/find", async (req, res) => {
+  // ? How to perform case-Insensitive search in Mongoose?
+
+  // * There's a problem with this approach too that if any document has the same search pattern it'll return all the documents containing search pattern
+  // const regex = new RegExp("bilal", "i");
+
+  // ! So we'll use this instead this match the exact word not anything containing it
+  const regex = new RegExp("^bilAL$", "i");
+  const caseSearch = await userModel.find({
+    // ! This will result in an empty array so we will use regex for case-Insensitive searches
+    // username: "bilal",
+    username: regex,
+  });
+  res.send(caseSearch);
+});
+
+router.get("/delete", async (req, res) => {
+  const deletedUser = await userModel.findOneAndDelete({
+    username: "Bilal",
+  });
+  res.send(`Deleted User is : ${deletedUser}`);
 });
 
 module.exports = router;
