@@ -10,9 +10,10 @@ const userSchema = mongoose.Schema({
     type: Array,
     default: [],
   },
-  dateCreated: Date.now(),
+  dateCreated: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 
-mongoose.model("user", userSchema);
-
-module.exports = userSchema;
+module.exports = mongoose.model("user", userSchema);
