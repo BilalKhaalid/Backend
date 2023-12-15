@@ -85,4 +85,26 @@ router.get("/date", async (req, res) => {
   res.send(dateSpecificUser);
 });
 
+// ? How to find/search a user or document's specific field length?
+router.get("/length", async (req, res) => {
+  const user = await userModel.find({
+    $expr: {
+      $and: [
+        {
+          $gte: [
+            {
+              $strLenCP: "$nickname",
+            },
+            0,
+          ],
+        },
+        {
+          $lte: [{ $strLenCP: "$nickname" }, 12],
+        },
+      ],
+    },
+  });
+  res.send(user);
+});
+
 module.exports = router;
