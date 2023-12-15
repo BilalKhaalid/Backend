@@ -71,4 +71,18 @@ router.get("/delete", async (req, res) => {
   res.send(`Deleted User is : ${deletedUser}`);
 });
 
+// ? How to find a user or document based on a specific date range?
+
+router.get("/date", async (req, res) => {
+  const From_date = new Date("2023-12-15");
+  const To_date = new Date("2023-12-16");
+  const dateSpecificUser = await userModel.find({
+    dateCreated: {
+      $gte: From_date,
+      $lte: To_date,
+    },
+  });
+  res.send(dateSpecificUser);
+});
+
 module.exports = router;
