@@ -8,13 +8,13 @@ passport.use(new localStrategy(userModel.authenticate()));
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
+  res.render("index");
 });
 
 router.post("/register", async (req, res) => {
   const userData = new userModel({
-    username: String,
-    password: String,
+    username: req.body.username,
+    secret: req.body.secret,
   });
   userModel.register(userData, req.body.password).then((registeredUser) => {
     passport.authenticate("local")(req, res, () => {
@@ -23,8 +23,33 @@ router.post("/register", async (req, res) => {
   });
 });
 
-router.get("/profile", (req, res) => {
-  res.send("Welcome to profile");
+router.get("/profile", isLoggedIn, (req, res) => {
+  res.render(`profile`);
 });
+
+router.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/profile",
+    failureRedirect: "/",
+  }),
+  (req, res) => {}
+);
+
+router.get("/logout", isLoggedIn, (req, res, next) => {
+  req.logout(function (error) {
+    if (error) {
+      return next(error);
+    }
+    res.redirect("/");
+  });
+});
+
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/");
+}
 
 module.exports = router;
