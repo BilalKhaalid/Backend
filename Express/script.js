@@ -9,8 +9,8 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/profile/:username", (a, b, c) => {
-  b.send(`Hello i am ${a.params.username}`);
+app.get("/profile/:username", (req, res, next) => {
+  res.send(`Hello i am ${a.params.username}`);
 });
 
 app.use(function errorHandler(err, req, res, next) {
