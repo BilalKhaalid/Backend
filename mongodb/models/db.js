@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 
 const connectToDatabase = async () => {
   try {
-    await mongoose.connect("mongodb://localhost:27017/mongodb", {
+    //! By writing this line in code it creates a database with the name(learning) you have given in mongodb
+    await mongoose.connect("mongodb://localhost:27017/learning", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
