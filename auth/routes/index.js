@@ -8,12 +8,12 @@ passport.use(new localStrategy(userModel.authenticate()));
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
+  res.render("index");
 });
 
 // ! Profile Router
-router.get("/profile", isLoggedIn, (req, res) => {
-  res.render("profile");
+router.get("/profile", (req, res) => {
+  res.send("Welcome to profile");
 });
 
 // ! register route
