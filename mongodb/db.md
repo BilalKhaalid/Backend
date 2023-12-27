@@ -26,3 +26,25 @@ Schema is defining how a user i.e.(document) in the collection will be.It means 
 
 <!-- ? By writing this line in code a collection named Users will be created in the database with all the attribute of the schema we provided i.e. the document in this collection will have the structure of the schema we provided -->
 <!-- * mongoose.model("Users", UsersSchema); -->
+
+<!-- ? Cookie And Session -->
+
+<!-- ! Client Side -->            <!-- ! Server Side -->
+
+1. When we want to save data - 1) When we want to save data on
+   on client side we use cookies - server we use session
+2. Cookie are less secure than sessions - 2) Sessions are more secure
+3. cookies can be manipulated by user - 3) Sessions can't be manipulated by user
+
+<!-- ? Cookies Creation -->
+ <!--! This below line is used to create a cookie -->
+
+res.cookie("age", 23);
+
+   <!--! This line is used to read all the cookies that exists in the frontend -->
+
+req.cookies
+
+  <!--! This line is used to clear Cookie from the frontend -->
+
+res.clearCookie("ban");
