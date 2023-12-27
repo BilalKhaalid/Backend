@@ -25,4 +25,13 @@ router.get("/create", async (req, res) => {
   res.send(createdUser);
 });
 
+// ! Delete a User
+router.get("/delete", async (req, res) => {
+  const deletedUser = await User.findOneAndDelete({
+    username: "Ali",
+  });
+  console.log(deletedUser);
+  res.send(`User deleted successfully: ${deletedUser}`);
+});
+
 module.exports = router;
