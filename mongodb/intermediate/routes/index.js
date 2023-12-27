@@ -76,4 +76,19 @@ router.get("/exist", async (req, res) => {
   res.send(user);
 });
 
+// ? How i can filter document on basis of length of a field?
+router.get("/length", async (req, res) => {
+  const user = await UserModel.find({
+    $expr: {
+      // ! $and returns true only when all its inner values return true
+      $and: [
+        // ! $strLenCP is the aggregated method to compare two strings
+        { $gt: [{ $strLenCP: "$username" }, 0] },
+        { $lt: [{ $strLenCP: "$username" }, 6] },
+      ],
+    },
+  });
+  res.send(user);
+});
+
 module.exports = router;
