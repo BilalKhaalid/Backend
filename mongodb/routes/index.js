@@ -15,7 +15,7 @@ router.get("/users", async (req, res) => {
 });
 
 // ! Create User route
-router.get("/create", async (req, res) => {
+router.post("/create", async (req, res) => {
   const createdUser = await User.create({
     username: "Bilal",
     email: "Bilal@gmail.com",
