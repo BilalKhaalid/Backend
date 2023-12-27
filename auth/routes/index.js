@@ -12,8 +12,8 @@ router.get("/", function (req, res, next) {
 });
 
 // ! Profile Router
-router.get("/profile", (req, res) => {
-  res.send("Welcome to profile");
+router.get("/profile", isLoggedIn, (req, res) => {
+  res.render("profile");
 });
 
 // ! register route
@@ -41,7 +41,7 @@ router.post(
 );
 
 // ! Logout Route
-router.get("logout", (req, res, next) => {
+router.get("/logout", (req, res, next) => {
   req.logout((err) => {
     if (err) {
       return next(err);
