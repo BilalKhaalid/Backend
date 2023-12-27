@@ -50,4 +50,19 @@ router.get("/categories", async (req, res) => {
   res.send(user);
 });
 
+// ? How can i search for documents with specific date range in mongoose?
+router.get("/date", async (req, res) => {
+  let from_date = new Date("2023-12-27");
+  let to_date = Date.now();
+  const user = await UserModel.find({
+    createdAt: {
+      // ! $gte stands for greater than and equal to
+      $gte: from_date,
+      // ! $lte stands for less than and equal to
+      $lte: to_date,
+    },
+  });
+  res.send(user);
+});
+
 module.exports = router;
