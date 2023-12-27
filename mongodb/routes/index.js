@@ -5,7 +5,9 @@ const User = require("../models/User");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
+  // ! This below line is used to create a cookie
+  res.cookie("age", 23);
+  res.send("Cookie Created");
 });
 
 // ! Get all Users
@@ -32,6 +34,19 @@ router.get("/delete", async (req, res) => {
   });
   console.log(deletedUser);
   res.send(`User deleted successfully: ${deletedUser}`);
+});
+
+// ? Cookies
+router.get("/read", (req, res) => {
+  // ! This line is used to read all the cookies that exists in the frontend
+  console.log(req.cookies);
+  res.send("check console");
+});
+
+router.get("/clear", (req, res) => {
+  // ! This line is used to clear Cookie from the frontend
+  res.clearCookie("ban");
+  res.send("Cookie Cleared");
 });
 
 module.exports = router;
