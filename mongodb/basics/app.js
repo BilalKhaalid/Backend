@@ -3,11 +3,11 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-const { connectToDatabase } = require("./basics/models/db");
+const { connectToDatabase } = require("./models/db");
 const session = require("express-session");
 
-var indexRouter = require("./basics/routes/index");
-var usersRouter = require("./basics/routes/users");
+var indexRouter = require("./routes/index");
+var usersRouter = require("./routes/users");
 
 var app = express();
 
