@@ -41,4 +41,13 @@ router.get("/find", async (req, res) => {
   res.send(user);
 });
 
+// ? How can i find documents where an array field contains all of a set of values?
+router.get("/categories", async (req, res) => {
+  const user = await UserModel.find({
+    // ! $all means give me all the users array who contain these query fields in the categories array
+    categories: { $all: ["doctor", "medicine"] },
+  });
+  res.send(user);
+});
+
 module.exports = router;
