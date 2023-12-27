@@ -50,7 +50,7 @@ router.get("/categories", async (req, res) => {
   res.send(user);
 });
 
-// ? How can i search for documents with specific date range in mongoose?
+// ? How can I search for documents with specific date range in mongoose?
 router.get("/date", async (req, res) => {
   let from_date = new Date("2023-12-27");
   let to_date = Date.now();
@@ -60,6 +60,17 @@ router.get("/date", async (req, res) => {
       $gte: from_date,
       // ! $lte stands for less than and equal to
       $lte: to_date,
+    },
+  });
+  res.send(user);
+});
+
+// ? How can I filter documents based on the existence of a field in mongoose?
+router.get("/exist", async (req, res) => {
+  const user = await UserModel.find({
+    categories: {
+      // ! $exists will find all the fields that exists in the document where it is an empty field if it's in the schema it will give all the users having that field
+      $exists: true,
     },
   });
   res.send(user);
