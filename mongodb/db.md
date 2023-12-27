@@ -48,3 +48,27 @@ req.cookies
   <!--! This line is used to clear Cookie from the frontend -->
 
 res.clearCookie("ban");
+
+<!-- ? Sessions Creation -->
+
+1. install the express-session library : npm i express-session
+2. require and use session variable in app.use(session({
+   with following options:
+   resave: false,
+   saveUninitialized: false,
+   secret: "your_secret_string",
+   }))
+
+<!--!   This line below is used to create a session in the server -->
+
+req.session.name_of_session = value
+Example: req.session.ban = true;
+
+<!-- ! This line is used to read a session created in the server -->
+
+req.session.name_of_session
+For Example: req.session.ban
+
+<!-- ! This line is used to destroy the session created in the server -->
+
+req.session.destroy()
