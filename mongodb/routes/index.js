@@ -8,6 +8,12 @@ router.get("/", function (req, res, next) {
   res.render("index", { title: "Express" });
 });
 
+// ! Get all Users
+router.get("/users", async (req, res) => {
+  const all_Users = await User.find({});
+  res.send(all_Users);
+});
+
 // ! Create User route
 router.get("/create", async (req, res) => {
   const createdUser = await User.create({
