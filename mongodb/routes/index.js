@@ -6,8 +6,12 @@ const User = require("../models/User");
 /* GET home page. */
 router.get("/", function (req, res, next) {
   // ! This below line is used to create a cookie
-  res.cookie("age", 23);
-  res.send("Cookie Created");
+  // res.cookie("age", 23);
+  // res.send("Cookie Created");
+
+  // ! This line below is used to create a session in the server
+  req.session.ban = true;
+  res.send("Session Created");
 });
 
 // ! Get all Users
@@ -47,6 +51,22 @@ router.get("/clear", (req, res) => {
   // ! This line is used to clear Cookie from the frontend
   res.clearCookie("ban");
   res.send("Cookie Cleared");
+});
+
+// ? Sessions
+router.get("/check", (req, res) => {
+  console.log(req.session);
+  if (req.session.ban) {
+    res.send("you are banned");
+  } else {
+    res.send("you are not banned");
+  }
+});
+
+router.get("/destroy", (req, res) => {
+  req.session.destroy((err) => console.log(err));
+  console.log(req.session);
+  res.send("Session destroyed");
 });
 
 module.exports = router;
